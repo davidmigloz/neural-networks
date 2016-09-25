@@ -2,6 +2,7 @@
 % capa oculta y el algoritmo de entrenamiento. Además, con cada
 % configuración el entrenamiento se repite n veces para disminuir la
 % varianza y aleatoriedad.
+% Salida: trainAlg \n (numNeuronas, valConfusion)...
 
 [ inputs, targets ] = thyroid_dataset;
 n=10; % Nº de reentrenos
@@ -11,7 +12,8 @@ avg_cm=[0 0 0; 0 0 0; 0 0 0]; % Matriz de confusión media
 
 for train_f={'trainscg', 'traincgp'}
     train_func = train_f{1};
-    for n_neurons=5:5:30
+    disp(train_func);
+    for n_neurons=10:10:50
         for reduce_variance=1:1:n
             net = autoTrain(n_neurons, inputs, targets, train_func);
             [C,CM,IND,PER] = confusion(targets, net(inputs));
@@ -21,10 +23,14 @@ for train_f={'trainscg', 'traincgp'}
         end
         avg_c = avg_c/n;
         avg_cm = avg_cm./n;
-        disp(strcat('Para ''',int2str(n_neurons),''' neuronas entrenadas con ''', ...
-        train_func, ''' el error medio es: ''', num2str(avg_c),''''));
-        disp(strcat('La matriz de confusion media es: '));
-        disp(avg_cm);
-        %waitforbuttonpress
+        
+        % Human readable
+        %fprintf('Para %d nuronas entrenadas con %s el error medio es: %f\n',n_neurons,train_func,avg_c);
+        %disp('La matriz de confusion media es:');
+        %disp(avg_cm);
+        
+        % pgfplots format
+        fprintf('(%d,%f)',n_neurons,avg_c);
     end
+    fprintf('\n');
 end

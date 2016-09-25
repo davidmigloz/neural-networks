@@ -17,7 +17,9 @@
 \usepackage[T1]{fontenc}		% Font encoding
 \usepackage[spanish]{babel}	% Languaje
 \usepackage{lmodern}	% Typeface 
+\usepackage{textcomp} % Special symbols
 \usepackage{graphicx}	% Add pictures
+\usepackage{pgfplots} % Graphs and charts
 \usepackage{hyperref}	% Add a link to index entries
 \usepackage{amsmath}	% Advanced math typesetting
 \usepackage{amsfonts}	% Mathematical formulas
@@ -33,6 +35,8 @@
 % -------------------------------------------------------------
 % Images path
 \graphicspath{ {img/} }
+% Graphs configuration 
+\pgfplotsset{width=\textwidth,compat=1.9}
 % Hyperlinks coloring
 \hypersetup{
 	colorlinks,
@@ -154,6 +158,43 @@ Para realizar el estudio lo más automatizado posible, hemos creado una función
 \section{Estudio}
 
 asdfasdf
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Evolución del valor de confusión en la red neuronal},
+    xlabel={Número de neuronas en la capa oculta},
+    ylabel={Valor de confusión},
+    xmin=0, xmax=60,
+    ymin=0.04, ymax=0.08,
+    xtick={0,10,20,30,40,50,60},
+    ytick={0.04,0.05,0.06,0.07,0.08},
+    legend pos=north east,
+    ymajorgrids=true,
+    grid style=dashed,
+    scaled ticks=false, % prevent scale labels
+    tick label style={/pgf/number format/fixed}, % label number format
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+    (10,0.056458)(20,0.061354)(30,0.060983)(40,0.062293)(50,0.065021)
+    };
+    \addlegendentry{trainscg}
+    
+\addplot[
+    color=red,
+    mark=o,
+    ]
+    coordinates {
+    (10,0.066099)(20,0.061332)(30,0.054675)(40,0.062092)(50,0.058320)
+    };
+    \addlegendentry{traincgp}
+        
+\end{axis}
+\end{tikzpicture}
 
 \section{Mejor resultado obtenido}
 
