@@ -25,7 +25,7 @@ for train_f={'trainscg', 'traincgp'}
         avg_cm = avg_cm./n;
         
         % Human readable
-        %fprintf('Para %d nuronas entrenadas con %s el error medio es: %f\n',n_neurons,train_func,avg_c);
+        %fprintf('Para %d neuronas entrenadas con %s el error medio es: %f\n',n_neurons,train_func,avg_c);
         %disp('La matriz de confusion media es:');
         %disp(avg_cm);
         
