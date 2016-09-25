@@ -90,17 +90,17 @@
 
 \section{Introduction}
 
-El objetivo de la práctica es diseñar y entrenar una red neuronal para la clasificación de pacientes en tres grupos dependiendo de la patología en la glándula tiroides. Se trata de un problema de reconocimiento de patrones en el que dados unos datos de entrada la red neuronal será capaz de asignarlos a una de las tres clases (pacientes sanos, con hipertiroidismo o con hipertiroidismo). Haremos uso del dataset de ejemplo \emph{Thyroid} que provée Matlab.
+El objetivo de la práctica es diseñar y entrenar una red neuronal para la clasificación de pacientes en tres grupos dependiendo de la patología en la glándula tiroides. Se trata de un problema de reconocimiento de patrones en el que dados unos datos de entrada la red neuronal será capaz de asignarlos a una de las tres clases definidas (pacientes sanos, con hipertiroidismo o con hipertiroidismo). Haremos uso del dataset de ejemplo \emph{Thyroid} que provée Matlab.
 
 Realizaremos un estudio sobre el ajuste en el número de neuronas, ejecutando varios entrenamientos con la red y modificando el valor de este parámetro. Y discutiremos qué configuración nos proporciona los mejores resultados. Por último, explotaremos la red y analizaremos las salidas devueltas.
 
 \section{Motivación}
 
-La motivación que nos llevó a elegir el tema del trabajo fue el que ambos poseíamos algún familiar que sufría alguna alteración en la glándula tiroides. Además, el gran desarrollo que están teniendo las redes neuronales aplicadas a la medicina en los últimos años nos desató interés en adentrarnos en este tema.
+La motivación que nos llevó a elegir el tema del trabajo fue el que ambos poseíamos algún familiar que sufría alguna alteración en la glándula tiroides. Además, el gran desarrollo que están teniendo las redes neuronales aplicadas a la medicina en los últimos años nos desató interés para adentrarnos en este tema.
 
 \section{Descripción del conjunto de datos}
 
-El conjunto de datos utilizados los hemos obtenido del dataset de ejemplo \emph{Thyroid} que provée Matlab. Los datos provienen del \emph{UCI Machine Learning Repository}. \citep{Asuncion+Newman:2007} 
+El conjunto de datos utilizados los hemos obtenido del dataset de ejemplo \emph{Thyroid} que provée Matlab. Los datos provienen del \emph{UCI Machine Learning Repository} \citep{Asuncion+Newman:2007} y fueron donados por la Universidad de California.
 
 El dataset contiene datos de 7200 pacientes agrupados en dos matrices:
 
@@ -118,6 +118,10 @@ Las tres clases que contiene el dataset son:
 	\item Paciente con hipertiroidismo.
 	\item Paciente con hipotiroidismo.
 \end{enumerate}
+
+La descripción precisa del significado real de cada atributo y los valores que puede tomar la podemos encontrar en la página web del repositorio \citep{Asuncion+Newman:2007}. Para nuestra tarea no nos es relevante.
+
+Nuestro objetivo es construir una red neuronal y entrenarla con los datos reales propocionados para que posteriormente sea capaz de clasificar a nueveos pacientes. 
 
 \section{Descripción del procedimiento}
 
