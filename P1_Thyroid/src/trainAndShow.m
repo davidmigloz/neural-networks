@@ -3,7 +3,7 @@
 % configuración el entrenamiento se repite n veces para disminuir la
 % varianza y aleatoriedad.
 % Salida: trainAlg \n (numNeuronas, valConfusion)...
-% Salida: results.txt
+% Salida: results.txt 
 
 [ inputs, targets ] = thyroid_dataset;
 n=10; % Nº de reentrenos
