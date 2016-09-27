@@ -19,14 +19,14 @@ arrayForFutureTable = cell(7);
 iter = 1;%En que fila del array se debe escribir
 
 %Funciones de entrenamiento posibles
-train_functions = { ...'trainbfg',   
-    'trainrp'..., 'trainscg', 'traincgb', 'traincgf', 'traincgp', 'trainoss',  'traingdx'
+train_functions = { 'trainbfg', 'trainrp', 'trainscg', 'traincgb',...
+    'traincgf', 'traincgp', 'trainoss',  'traingdx'
 };
 
 for train_f=train_functions
     train_func = train_f{1};
     disp(train_func);
-    for n_neurons=10:10:50
+    for n_neurons=1:1:100
         %Reset values
         avg_time = 0;
         avg_c = 0;
