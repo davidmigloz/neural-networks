@@ -29,5 +29,6 @@ function [ net ] = autoTrain(n_neurons, inputs, targets, train_function,...
         net.divideParam.valRatio = ratios(2);
         net.divideParam.testRatio = 1-ratios(1)-ratios(2);
     end
+    net.trainParam.showWindow = false;
     net = train(net, inputs ,targets);
 end

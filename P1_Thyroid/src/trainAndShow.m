@@ -34,7 +34,7 @@ for train_f=train_functions
         
         for reduce_variance=1:1:n
             initial_time = cputime;
-            net = autoTrain(n_neurons, inputs, targets, train_func);
+            net = autoTrain(n_neurons, inputs, targets, train_func);         
             time = cputime - initial_time;
             [C,CM,IND,PER] = confusion(targets, net(inputs));
             avg_c  = avg_c  + C ;
@@ -53,7 +53,7 @@ for train_f=train_functions
         
         % pgfplots format
         fprintf('(%d,%f)',n_neurons,avg_c);
-        % Save to an array to save in the future
+        % Save data in a cell 
         arrayForFutureTable(iter, :) = {train_f, n_neurons, avg_c,...
             avg_cm(1,:), avg_cm(2,:), avg_cm(3,:), avg_time}; 
         iter=iter+1;

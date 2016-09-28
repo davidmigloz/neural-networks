@@ -147,11 +147,13 @@ Para resolver la tarea planteada creamos una red neuronal con una topología \hr
 	\caption{Pattern recognition network.}
 \end{figure}
 
-En nuestro estudio variaremos el número de neuronas de la capa oculta para intentar conseguir los mejores resultados. La capa de salida siempre va a tener tres neuronas, cada una se encargará de evaluar la pertenercia a una de las tres clases.
+En nuestro estudio vamos a variar el número de neuronas de la capa oculta para intentar conseguir los mejores resultados (tanto en error, como en tiempo de entrenamiento). La capa de salida siempre va a tener tres neuronas, cada una se encargará de evaluar la pertenercia a una de las tres clases.
 
-Otro elemento que puede afectar al rendimiento de nuestra red es la función de entrenamiento utilizada. Probaremos dos funciones distintas para comparar resultados.
+Otro elemento que puede afectar al rendimiento de nuestra red es la función de entrenamiento utilizada. Probaremos ocho funciones distintas que implementa Matlab para comparar resultados.
 
-Para realizar el estudio lo más automatizado posible, hemos creado una función ($autoTrain$) que se encarga de entrenar la red de acuerdo con los parámetros pasados. Por otro lado tenemos un script que llama a esta función variando el número de neuronas de la capa oculta (10, 25, 50) y los algoritmos de entrenamiento ($trainscg$ y $traincgp$), mostrando la matriz de confusión de cada caso.
+Para realizar el estudio lo más automatizado posible, hemos creado una función ($autoTrain$) que se encarga de entrenar la red de acuerdo con los parámetros pasados. Por otro lado tenemos un script ($trainAndShow.m$) que llama a esta función variando el número de neuronas de la capa oculta (de 1 a 100 con paso 1) y los algoritmos de entrenamiento ($trainbfg$, $trainrp$, $trainscg$, $traincgb$,  $traincgf$, $traincgp$, $trainoss$ y $traingdx$). Además, repite el entrenamiento de cada caso 10 veces para disminuir la varianza y la aleatoriedad.
+
+El script proporciona como salida el valor de confusión medio en cada caso,  la matríz de confusión completa y el tiempo medio de entrenamiento. Con tres formatos de salida, un primer formato legible para humanos, otro formateado para la librería de gráficos \textit{pgfplots} y un tercer formato como CSV.
 
 \emph{*Todo el código generado en esta práctica se encuentra disponible en el siguiente repositorio: 
 \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P1\_Thyroid}{P1\_Thyroid}.}
