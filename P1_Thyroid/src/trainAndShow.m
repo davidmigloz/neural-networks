@@ -26,7 +26,7 @@ train_functions = { 'trainbfg', 'trainrp', 'trainscg', 'traincgb',...
 for train_f=train_functions
     train_func = train_f{1};
     disp(train_func);
-    for n_neurons=1:1:100
+    for n_neurons=1:1:50
         %Reset values
         avg_time = 0;
         avg_c = 0;
