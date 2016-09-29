@@ -95,17 +95,17 @@
 
 \section{Introduction}
 
-El objetivo de la práctica es diseñar y entrenar una red neuronal para la clasificación de pacientes en tres grupos dependiendo de la patología en la glándula tiroides. Se trata de un problema de reconocimiento de patrones en el que dados unos datos de entrada la red neuronal será capaz de asignarlos a una de las tres clases definidas (pacientes sanos, con hipertiroidismo o con hipertiroidismo). Haremos uso del dataset de ejemplo \emph{Thyroid} que provée Matlab.
+El objetivo de la práctica es diseñar y entrenar una red neuronal para la clasificación de pacientes en tres grupos dependiendo de la patología en la glándula tiroides. Se trata de un problema de reconocimiento de patrones en el que dados unos datos de entrada, la red neuronal será capaz de asignarlos a una de las tres clases definidas (pacientes sanos, con hipertiroidismo o con hipotiroidismo). Haremos uso del dataset de ejemplo \emph{Thyroid} que provee Matlab.
 
-Realizaremos un estudio sobre el ajuste en el número de neuronas, ejecutando varios entrenamientos con la red y modificando el valor de este parámetro. Y discutiremos qué configuración nos proporciona los mejores resultados. Por último, explotaremos la red y analizaremos las salidas devueltas.
+Realizaremos un estudio sobre el ajuste en el número de neuronas, ejecutando varios entrenamientos con la red y modificando el valor de este parámetro. También estudiaremos el rendimiento que proporcionan los diferentes algoritmos de entranamiento incluidos en Matlab. Por último, discutiremos qué configuración nos proporciona los mejores resultados, explotaremos la red y analizaremos las salidas devueltas.
 
 \section{Motivación}
 
-La motivación que nos llevó a elegir el tema del trabajo fue el que ambos poseíamos algún familiar que sufría alguna alteración en la glándula tiroides. Además, el gran desarrollo que están teniendo las redes neuronales aplicadas a la medicina en los últimos años nos desató interés para adentrarnos en este tema.
+La motivación que nos llevó a elegir el tema del trabajo fue el que ambos poseíamos algún familiar que sufría alguna alteración en la glándula tiroides. Además, el gran desarrollo que están teniendo las redes neuronales aplicadas a la medicina en los últimos años (ej. IBM Matson \citep{wiki:watson}) nos desató interés para adentrarnos en este tema.
 
 \section{Descripción del conjunto de datos}
 
-El conjunto de datos utilizados los hemos obtenido del dataset de ejemplo \emph{Thyroid} que provée Matlab. Los datos provienen del \emph{UCI Machine Learning Repository} \citep{Asuncion+Newman:2007} y fueron donados por la Universidad de California.
+El conjunto de datos utilizados los hemos obtenido del dataset de ejemplo \emph{Thyroid} que provee Matlab. Los datos provienen del \emph{UCI Machine Learning Repository} \citep{Asuncion+Newman:2007} y fueron donados por la Universidad de California.
 
 El dataset contiene datos de 7200 pacientes agrupados en dos matrices:
 
@@ -138,7 +138,7 @@ Dividiremos aleatoriamente los datos que contiene el data set en tres grupos:
 
 \section{Descripción del procedimiento}
 
-Para resolver la tarea planteada creamos una red neuronal con una topología \href{http://www.mathworks.com/help/nnet/ref/patternnet.html}{patternnet}. Esta topología posée dos capas \textit{feedforward}, con una función de activación sigmoidal en la capa oculta y una función \textit{softmax} en la capa de salida. Se caracteriza por poder clasificar vectores con una precisión arbitrariamente buena si posée suficientes neuronas en su capa oculta.
+Para resolver la tarea planteada creamos una red neuronal con una topología \href{http://www.mathworks.com/help/nnet/ref/patternnet.html}{patternnet}. Esta topología posee dos capas \textit{feedforward}, con una función de activación sigmoidal en la capa oculta y una función \textit{softmax} en la capa de salida. Se caracteriza por poder clasificar vectores con una precisión arbitrariamente buena si posee suficientes neuronas en su capa oculta.
 
 \begin{figure}[!ht]
 	\centering
@@ -151,7 +151,7 @@ En nuestro estudio vamos a variar el número de neuronas de la capa oculta para 
 
 Otro elemento que puede afectar al rendimiento de nuestra red es la función de entrenamiento utilizada. Probaremos ocho funciones distintas que implementa Matlab para comparar resultados.
 
-Para realizar el estudio lo más automatizado posible, hemos creado una función ($autoTrain$) que se encarga de entrenar la red de acuerdo con los parámetros pasados. Por otro lado tenemos un script ($trainAndShow.m$) que llama a esta función variando el número de neuronas de la capa oculta (de 1 a 100 con paso 1) y los algoritmos de entrenamiento ($trainbfg$, $trainrp$, $trainscg$, $traincgb$,  $traincgf$, $traincgp$, $trainoss$ y $traingdx$). Además, repite el entrenamiento de cada caso 10 veces para disminuir la varianza y la aleatoriedad.
+Para realizar el estudio lo más automatizado posible, hemos creado una función ($autoTrain$) que se encarga de entrenar la red de acuerdo con los parámetros pasados. Por otro lado tenemos un script ($trainAndShow.m$) que llama a esta función variando el número de neuronas de la capa oculta (de 1 a 50 con paso 1) y los algoritmos de entrenamiento ($trainbfg$, $trainrp$, $trainscg$, $traincgb$,  $traincgf$, $traincgp$, $trainoss$ y $traingdx$). Además, repite el entrenamiento de cada caso 10 veces para disminuir la varianza y la aleatoriedad.
 
 El script proporciona como salida el valor de confusión medio en cada caso,  la matríz de confusión completa y el tiempo medio de entrenamiento. Con tres formatos de salida, un primer formato legible para humanos, otro formateado para la librería de gráficos \textit{pgfplots} y un tercer formato como CSV.
 
@@ -160,7 +160,13 @@ El script proporciona como salida el valor de confusión medio en cada caso,  la
 
 \section{Estudio}
 
-asdfasdf
+Tras realizar la ejecución del programa descrito en la sección anterior, hemos obtenido los datos que se muestran en las siguientes gráficas.
+
+En las dos primeras se muestra, para cada algoritmo de entrenamiento, la evolución del valor de confusión total ponderado de todos los conjuntos de datos (entrenamiento, validación y pruebas) según se incrementa el número de neuronas en la capa oculta. 
+
+\textit{*Hemos dividido los resultados en dos gráficas para mejorar la legibilidad de las mismas.}
+
+En las dos segundas se muestra la evolución del tiempo empleado en el entrenamiento de la red neuronal según se aumenta el número de neuronas en la capa oculta.
 
 \newpage
 \newgeometry{top=1cm,bottom=2.5cm}
@@ -337,6 +343,22 @@ asdfasdf
 
 \restoregeometry
 \newpage
+
+En primer lugar, destacamos la desequilibrada distribución de pacientes de cada clase que contiene el conjunto de datos utilizado. Existen 166 pacientes sanos, 368 con hipertiroidismo y 6.666 pacientes con hipotiroidismo. Lo cual ha provado que hasta las redes neuronales más simples (pocas neuronas) tengan un error relativamente bajo. 
+
+Por ejemplo, una red neuronal de una neurona entrenada con el algoritmo \textit{trainbfg} optiene un valor de confusión total ponderado del 7,4\%. Destacando que clasifica todos los datos como pertenecientes al grupo de hipotiroidismo (el más numeroso).
+
+Respecto a los resultados observados en los dos primeros gráficos, cabe destacar que no hay mucha diferencia en el valor de confusión de un algoritmo de entrenamiento a otro, con la excepción del algoritmo \textit{traingdx} que produce unos resultados bastante peores que la media. 
+
+Se observa una mejora en el aprendizaje según se aumenta el número de neuronas de la capa oculta. Empezando en torno al 7\%, mejora hasta aproximandamente un 5,7\% de media con diez neuronas y se estabilizan en torno al 5,5\%.
+
+Los resultados más descados nos los proporcionan los algoritmos \textit{trainbfg, traincgb} y \textit{traincgf}. Los dos primeros aprenden rápidamente, obteniendo valores entre 4\% y 4,5\% en torno a las 10 neuronas. El tercero tiene una pendiente menos pronunciada pero que se mantiene según se aumenta el número de neuronas, llegando a valores en torno al 4,5\%.
+
+
+
+
+
+
 
 \section{Mejor resultado obtenido}
 
