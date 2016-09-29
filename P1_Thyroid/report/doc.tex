@@ -97,7 +97,7 @@
 
 El objetivo de la práctica es diseñar y entrenar una red neuronal para la clasificación de pacientes en tres grupos dependiendo de la patología en la glándula tiroides. Se trata de un problema de reconocimiento de patrones en el que dados unos datos de entrada, la red neuronal será capaz de asignarlos a una de las tres clases definidas (pacientes sanos, con hipertiroidismo o con hipotiroidismo). Haremos uso del dataset de ejemplo \emph{Thyroid} que provee Matlab.
 
-Realizaremos un estudio sobre el ajuste en el número de neuronas, ejecutando varios entrenamientos con la red y modificando el valor de este parámetro. También estudiaremos el rendimiento que proporcionan los diferentes algoritmos de entranamiento incluidos en Matlab. Por último, discutiremos qué configuración nos proporciona los mejores resultados, explotaremos la red y analizaremos las salidas devueltas.
+Realizaremos un estudio sobre el ajuste en el número de neuronas, ejecutando varios entrenamientos con la red y modificando el valor de este parámetro. También estudiaremos el rendimiento que proporcionan los diferentes algoritmos de entrenamiento  incluidos en Matlab. Por último, discutiremos qué configuración nos proporciona los mejores resultados, explotaremos la red y analizaremos las salidas devueltas.
 
 \section{Motivación}
 
@@ -126,13 +126,13 @@ Las tres clases que contiene el dataset son:
 
 La descripción precisa del significado real de cada atributo y los valores que puede tomar la podemos encontrar en la página web del repositorio \citep{Asuncion+Newman:2007}. Para nuestra tarea no nos es relevante.
 
-Nuestro objetivo es construir una red neuronal y entrenarla con los datos reales propocionados para que posteriormente sea capaz de clasificar a nueveos pacientes. 
+Nuestro objetivo es construir una red neuronal y entrenarla con los datos reales proporcionados para que posteriormente sea capaz de clasificar a nuevos pacientes. 
 
 Dividiremos aleatoriamente los datos que contiene el data set en tres grupos:
 
 \begin{itemize}[noitemsep]
 	\item $Training (70\%)$: lo utilizaremos para el entrenamiento supervisado.
-	\item $Validation (15\%)$: lo utilizaremos para comprobar cuándo la red está generalizando y detener el entranamiento para evitar el sobreajuste (\textit{overfitting}).
+	\item $Validation (15\%)$: lo utilizaremos para comprobar cuándo la red está generalizando y detener el entrenamiento para evitar el sobreajuste (\textit{overfitting}).
 	\item $Test (15\%)$: lo utilizaremos de forma totalmente independiente al entrenamiento para comprobar la generalización de la red.
 \end{itemize}
 
@@ -147,13 +147,13 @@ Para resolver la tarea planteada creamos una red neuronal con una topología \hr
 	\caption{Pattern recognition network.}
 \end{figure}
 
-En nuestro estudio vamos a variar el número de neuronas de la capa oculta para intentar conseguir los mejores resultados (tanto en error, como en tiempo de entrenamiento). La capa de salida siempre va a tener tres neuronas, cada una se encargará de evaluar la pertenercia a una de las tres clases.
+En nuestro estudio vamos a variar el número de neuronas de la capa oculta para intentar conseguir los mejores resultados (tanto en error, como en tiempo de entrenamiento). La capa de salida siempre va a tener tres neuronas, cada una se encargará de evaluar la pertenencia a una de las tres clases.
 
 Otro elemento que puede afectar al rendimiento de nuestra red es la función de entrenamiento utilizada. Probaremos ocho funciones distintas que implementa Matlab para comparar resultados.
 
 Para realizar el estudio lo más automatizado posible, hemos creado una función ($autoTrain$) que se encarga de entrenar la red de acuerdo con los parámetros pasados. Por otro lado tenemos un script ($trainAndShow.m$) que llama a esta función variando el número de neuronas de la capa oculta (de 1 a 50 con paso 1) y los algoritmos de entrenamiento ($trainbfg$, $trainrp$, $trainscg$, $traincgb$,  $traincgf$, $traincgp$, $trainoss$ y $traingdx$). Además, repite el entrenamiento de cada caso 10 veces para disminuir la varianza y la aleatoriedad.
 
-El script proporciona como salida el valor de confusión medio en cada caso,  la matríz de confusión completa y el tiempo medio de entrenamiento. Con tres formatos de salida, un primer formato legible para humanos, otro formateado para la librería de gráficos \textit{pgfplots} y un tercer formato como CSV.
+El script proporciona como salida el valor de confusión medio en cada caso,  la matriz de confusión completa y el tiempo medio de entrenamiento. Con tres formatos de salida, un primer formato legible para humanos, otro formateado para la librería de gráficos \textit{pgfplots} y un tercer formato como CSV.
 
 \emph{*Todo el código generado en esta práctica se encuentra disponible en el siguiente repositorio: 
 \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P1\_Thyroid}{P1\_Thyroid}.}
@@ -344,23 +344,25 @@ En las dos segundas se muestra la evolución del tiempo empleado en el entrenami
 \restoregeometry
 \newpage
 
-En primer lugar, destacamos la desequilibrada distribución de pacientes de cada clase que contiene el conjunto de datos utilizado. Existen 166 pacientes sanos, 368 con hipertiroidismo y 6.666 pacientes con hipotiroidismo. Lo cual ha provado que hasta las redes neuronales más simples (pocas neuronas) tengan un error relativamente bajo. 
+En primer lugar, destacamos la desequilibrada distribución de pacientes de cada clase que contiene el conjunto de datos utilizado. Existen 166 pacientes sanos, 368 con hipertiroidismo y 6.666 pacientes con hipotiroidismo. Lo cual ha provocado que hasta las redes neuronales más simples (pocas neuronas) tengan un error relativamente bajo. 
 
-Por ejemplo, una red neuronal de una neurona entrenada con el algoritmo \textit{trainbfg} optiene un valor de confusión total ponderado del 7,4\%. Destacando que clasifica todos los datos como pertenecientes al grupo de hipotiroidismo (el más numeroso).
+Por ejemplo, una red neuronal de una neurona entrenada con el algoritmo \textit{trainbfg} obtiene un valor de confusión total ponderado del 7,4\%. Clasificando todos los datos como pertenecientes al grupo de hipotiroidismo (el más numeroso).
 
 Respecto a los resultados observados en los dos primeros gráficos, cabe destacar que no hay mucha diferencia en el valor de confusión de un algoritmo de entrenamiento a otro, con la excepción del algoritmo \textit{traingdx} que produce unos resultados bastante peores que la media. 
 
-Se observa una mejora en el aprendizaje según se aumenta el número de neuronas de la capa oculta. Empezando en torno al 7\%, mejora hasta aproximandamente un 5,7\% de media con diez neuronas y se estabilizan en torno al 5,5\%.
+Se observa una mejora en el aprendizaje según se aumenta el número de neuronas de la capa oculta. Empezando en torno al 7\%, mejorando hasta aproximadamente un 5,7\% de media con diez neuronas y estabilizándose en torno al 5,5\%.
 
 Los resultados más descados nos los proporcionan los algoritmos \textit{trainbfg, traincgb} y \textit{traincgf}. Los dos primeros aprenden rápidamente, obteniendo valores entre 4\% y 4,5\% en torno a las 10 neuronas. El tercero tiene una pendiente menos pronunciada pero que se mantiene según se aumenta el número de neuronas, llegando a valores en torno al 4,5\%.
 
-Desde el punto de vista de el tiempo necesario para entrenar las redes neuronales en relacción al algoritmo usado para su entrenamiento cabe destacar que el algoritmo \textit{trainbfg} a pesar de que sus resultados son mejores que la media, su tiempo de entrenamiento es completamente irrazonable llegando a 140 segundos con 50 neuronas cuando el resto de algoritmos no llegan a 5 segundos.
+Desde el punto de vista del tiempo necesario para entrenar las redes neuronales en relación al algoritmo de entrenamiento usado, cabe destacar que el algoritmo \textit{trainbfg}, a pesar de que en el apartado anterior poseía unos buenos resultados, su tiempo de entrenamiento es completamente irrazonable llegando a 140 segundos con 50 neuronas, cuando el resto de algoritmos no supera los 5 segundos. 
 
-El resto de algorimos tienen un tiempo medio de unos 3 - 3,5 segundos para 50 neuronas lo cual es un tiempo más que aceptable.
+Por otro lado, el algoritmo \textit{traingdx} que obtenía uno de los peores resultados en valor de confusión, presenta uno de los mejores tiempos de entrenamiento junto con \textit{trainnrp} y \textit{trainscg}.
+
+El resto de algoritmos tienen un tiempo medio de unos 3-3,5 segundos para 50 neuronas, lo cual es un tiempo más que aceptable.
 
 \section{Mejor resultado obtenido}
 
-Los mejores resultados obtenidos teniendo en consideracion tanto el tiempo como el error total ponderado son \textit{traincgb} y \textit{traincgf}, con estos dos hemos decidido trabajar un poco más para ver si había o no una diferencia significativa entre ellos. 
+Los mejores resultados obtenidos teniendo en consideración tanto el tiempo como el error total ponderado son \textit{traincgb} y \textit{traincgf}, con estos dos hemos decidido trabajar un poco más para ver si había o no una diferencia significativa entre ellos. 
 
 Para comprobar esto hemos decidido alargar la ejecución hasta 150 neuronas.
 
