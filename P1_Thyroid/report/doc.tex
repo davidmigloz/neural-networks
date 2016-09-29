@@ -362,15 +362,34 @@ El resto de algoritmos tienen un tiempo medio de unos 3-3,5 segundos para 50 neu
 
 \section{Mejor resultado obtenido}
 
-Los mejores resultados obtenidos teniendo en consideración tanto el tiempo como el error total ponderado son \textit{traincgb} y \textit{traincgf}, con estos dos hemos decidido trabajar un poco más para ver si había o no una diferencia significativa entre ellos. 
+Los mejores resultados obtenidos teniendo en consideración tanto el tiempo como el error total ponderado son \textit{traincgb} y \textit{traincgf}.
 
-Para comprobar esto hemos decidido alargar la ejecución hasta 150 neuronas. Tras obtener resultados, hemos concluido que no mejora significativamente los resultados debido a que incrementa el tiempo de entrenamiento sin dar ningun valor al resultado final.
+Con estos dos algotimos de entrenamiento hemos decidido ampliar el estudio para comprobar si se mantenía la bajada de error total ponderado que habían tenido. También nos interesaba comprobar si llegaría a haber diferencias significativas entre ambos.
 
+La ampliación del estudio se ha extendido hasta 150 neuronas en la capa oculta. Tras obtener los resultados, hemos concluido que los resultados no mejoran significativamente con el numero de neuronas y que lo que antes habíamos visto era un artefacto de la varianza en un conjunto de entrenamientos tan pequeño.
 
+La diferencia entre ambos algotimos de entrenamiento no ha llegado a ser suficiente para pensar que uno es inconfundiblemente mejor que el otro pero debido a que no disponemos de tiempo ilimitado para comprobar cual funciona mejor hemos decidido tomar los resultados que teníamos como significativos.
+
+En nuestros resultados hemos visto una ligera mejora de \textit{traincgb} con respecto a \textit{traincgf} y no se notaba mejora en cuanto al numero de neuronas a partir de 20 por lo que esos son los paramentros que hemos elegido.
 
 \section{Explotación de la red}
 
-asdfasdf
+Hemos procedido a buscar datos reales para probar la calidad real de la red mejor entrenada que hemos conseguido. Hemos comprobado que no había conjuntos de datos facilmente accesibles que usen los mismos parametros que los usados en el Thyroid_dataset, actualmente por ejemplo se disgregan mujeres y hombres.
+
+Tras esto la solución ha sido crear datos falsos como se hizo en clase: multiplicar datos que ya teníamos por un porcentaje alto para ver si al reintroducirlos en la red neuronal se consiguen los mismos resultados.
+
+Se ha creado un script para hacer esta ultima parte automaticamente. La ejecucion del mismo nos ha dado los siguientes resultados con los datos reales:
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:ConfMatrix}
+	\includegraphics[width=\textwidth]{ConfMatrix.png}
+	\caption{Confusion matrix.}
+\end{figure}
+
+Al introducir datos multiplicados por 0.95: 0.031806 (error total) y al introducir datos multiplicados por 1.05: 0.029306 (error total)
+
+
 
 % -------------------------------------------------------------
 % Bibliography
