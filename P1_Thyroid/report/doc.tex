@@ -354,15 +354,15 @@ Se observa una mejora en el aprendizaje según se aumenta el número de neuronas
 
 Los resultados más descados nos los proporcionan los algoritmos \textit{trainbfg, traincgb} y \textit{traincgf}. Los dos primeros aprenden rápidamente, obteniendo valores entre 4\% y 4,5\% en torno a las 10 neuronas. El tercero tiene una pendiente menos pronunciada pero que se mantiene según se aumenta el número de neuronas, llegando a valores en torno al 4,5\%.
 
+Desde el punto de vista de el tiempo necesario para entrenar las redes neuronales en relacción al algoritmo usado para su entrenamiento cabe destacar que el algoritmo \textit{trainbfg} a pesar de que sus resultados son mejores que la media, su tiempo de entrenamiento es completamente irrazonable llegando a 140 segundos con 50 neuronas cuando el resto de algoritmos no llegan a 5 segundos.
 
-
-
-
-
+El resto de algorimos tienen un tiempo medio de unos 3 - 3,5 segundos para 50 neuronas lo cual es un tiempo más que aceptable.
 
 \section{Mejor resultado obtenido}
 
-asdfasdf
+Los mejores resultados obtenidos teniendo en consideracion tanto el tiempo como el error total ponderado son \textit{traincgb} y \textit{traincgf}, con estos dos hemos decidido trabajar un poco más para ver si había o no una diferencia significativa entre ellos. 
+
+Para comprobar esto hemos decidido alargar la ejecución hasta 150 neuronas.
 
 \section{Explotación de la red}
 
