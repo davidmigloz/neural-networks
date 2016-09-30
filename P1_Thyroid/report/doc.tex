@@ -432,27 +432,29 @@ En ellos se puede observar una ligera ventaja de \textit{traincgb} con respecto 
 
 \section{Explotación de la red}
 
-Hemos procedido a buscar datos reales para probar la calidad real de la red mejor entrenada que hemos conseguido. Hemos comprobado que no había conjuntos de datos facilmente accesibles que usen los mismos parametros que los usados en el Thyroid\_dataset, actualmente por ejemplo se disgregan mujeres y hombres
+Para la explotación de la red intentamos buscar otros datasets del mismo tema pero con distintas fuentes, para poder evaluar la calidad real con nuevos datos. Sin embargo, todos los datasets sobre tiroides que encontramos no coincidían en los atributos usados.
 
-Tras esto la solución ha sido crear datos falsos como se hizo en clase: multiplicar datos que ya teníamos por un porcentaje alto para ver si al reintroducirlos en la red neuronal se consiguen los mismos resultados.
+Por lo tanto, procedimos a creat datos falsos con el procedimiento que seguimos en la clase de prácticas: 
+multiplicar datos que ya teníamos por un porcentaje alto para ver si al reintroducirlos en la red neuronal se consiguen los mismos resultados.
 
-Se ha creado un script para hacer esta ultima parte automaticamente. La ejecucion del mismo nos ha dado los siguientes resultados con los datos reales:
+Se ha creado un script para hacer esta última parte automáticamente. La ejecución del mismo nos ha dado los siguientes resultados con los datos reales:
+
+\newpage
 
 \begin{figure}[!ht]
 	\centering
 	\label{fig:ConfMatrix}
 	\includegraphics[width=\textwidth]{ConfMatrix.png}
-	\caption{Confusion matrix.}
+	\caption{Matriz de confusión.}
 \end{figure}
 
-Al introducir datos multiplicados por 0.95: 0.031806 (error total) y al introducir datos multiplicados por 1.05: 0.029306 (error total)
+Al introducir datos multiplicados por 0.95 obtenemos 0.031806 de error total. Mientras que al multiplicarlos por 1.05 obtenemos 0.029306. Como vemos, se obtienen unos resultados bastante buenos.
 
 
 
 % -------------------------------------------------------------
 % Bibliography
 % -------------------------------------------------------------
-\newpage
 \newpage
 \bibliography{citations}
 \bibliographystyle{plainnat}
