@@ -377,12 +377,13 @@ En ellos se puede observar una ligera ventaja de \textit{traincgb} con respecto 
     xlabel={Número de neuronas en la capa oculta},
     ylabel={Valor de confusión},
     xmin=1, xmax=150,
-    ymin=0.035, ymax=0.08,
+    ymin=0.035, ymax=0.080,
     legend pos=south east,
     ymajorgrids=true,
     grid style=dashed,
     scaled ticks=false, % prevent scale labels
-    tick label style={/pgf/number format/fixed}, % label number format
+    tick label style={/pgf/number format/fixed, % label number format
+                      /pgf/number format/precision=3}, 
     width=14cm,
 ]
 
