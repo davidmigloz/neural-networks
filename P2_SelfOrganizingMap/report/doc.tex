@@ -1,0 +1,181 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% P2 Self-organizing Map
+% David Miguel Lozano
+% Javier Martínez Riberas
+% Universidad de Burgos - Octubre 2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -------------------------------------------------------------
+% Preamble
+% -------------------------------------------------------------
+\documentclass[a4paper,12pt,titlepage]{article}
+
+% -------------------------------------------------------------
+% Packages
+% -------------------------------------------------------------
+\usepackage[utf8]{inputenc}	% Unicode support
+\usepackage[T1]{fontenc}		% Font encoding
+\usepackage[spanish]{babel}	% Languaje
+\usepackage{lmodern}	% Typeface 
+\usepackage{textcomp} % Special symbols
+\usepackage{graphicx}	% Add pictures
+\usepackage{pgfplots} % Graphs and charts
+\usepackage{hyperref}	% Add a link to index entries
+\usepackage{amsmath}	% Advanced math typesetting
+\usepackage{amsfonts}	% Mathematical formulas
+\usepackage{amssymb}	% Extended symbol collection
+\usepackage{listings}	% Code formatting and highlighting
+\usepackage{xcolor}		% Color package
+\usepackage{enumitem}	% Customizing lists
+\usepackage{parskip}	% Paragraph styles
+\usepackage[a4paper]{geometry} 		% Margins
+\usepackage[numbers,sort]{natbib}	% Bibliography management 
+
+% -------------------------------------------------------------
+% Configuration
+% -------------------------------------------------------------
+% Images path
+\graphicspath{ {img/} }
+% Graphs configuration 
+\pgfplotsset{width=\textwidth,compat=1.9}
+% Hyperlinks coloring
+\hypersetup{
+	colorlinks,
+	linkcolor={green!40!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+% Define HRule
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+% Define listings styles
+\definecolor{codebg}{HTML}{EEEEEE}
+\definecolor{codeframe}{HTML}{CCCCCC}
+\definecolor{comments}{HTML}{009900}
+\lstset{
+  language=Matlab, 								% Programming language 
+  backgroundcolor=\color{codebg},	% Background color
+  frame=single, 									% Add frame around code
+	framesep=10pt,									% Padding
+	rulecolor=\color{codeframe},		% Don't change frame color
+	upquote=true,										%
+	breakatwhitespace=true,					% Break line only in spaces
+	keepspaces=true,								% Keep indentation
+	tabsize=2,											% Tab size
+	title=\lstname, 								% Show filename as caption
+	basicstyle=\ttfamily, 					% Size and font
+  keywordstyle=\color{blue}\ttfamily,
+	commentstyle=\color{comments},	% Color of comments
+  morecomment=[l][\color{magenta}]{\#}
+}
+\begin{document}
+% -------------------------------------------------------------
+% Cover
+% -------------------------------------------------------------
+\author{David Miguel Lozano \ Javier Martínez Riberas}
+\title{P2 Self-organizing Maps}
+\date{08-10-2016}
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.16\textwidth]{ubu-logo.png}\par
+	\vspace{0.3cm}
+	{\scshape\LARGE Universidad de Burgos \par}
+	\vfill
+	{\scshape\Large Computación Neuronal y Evolutiva \par}
+	\HRule{2pt}
+	{\huge\bfseries P2: Self-organizing Maps \par}
+	\HRule{2pt}
+	\\ [0.5cm]
+	{Diseñar y entrenar un mapa auto-organizado con una rejilla bidimensional para el agrupamiento de un único conjunto de datos de muestra de tres dimensiones.).}
+	\vfill
+	Estudiantes:\par
+	{\Large\scshape David Miguel Lozano \\ Javier Martínez Riberas \par}
+	\vfill
+	Profesor de la asignatura:\par
+	\textsc{Álvaro Herrero Cosío}
+	\vfill
+	{\large 1º semestre 2016 \par}
+\end{titlepage}
+
+% -------------------------------------------------------------
+% Contents
+% -------------------------------------------------------------
+\newpage
+\tableofcontents
+\begin{appendix}
+  %\listoffigures
+  %\listoftables
+\end{appendix}
+
+% -------------------------------------------------------------
+% Body
+% -------------------------------------------------------------
+\newpage
+
+\section{Introduction}
+
+El objetivo de la práctica es diseñar y entrenar un mapa auto-organizado para una rejilla bidimensional con un único conjunto de datos de muestra de tres dimensiones. 
+
+Se realizará un estudio sobre el impacto que supone variar los siguientes parámetros en el entrenamiento del mapa para el mismo conjunto de datos:
+
+\begin{enumerate}[noitemsep]
+	\item Dimensiones de la topología.
+	\item Tamaño del vecindario.
+	\item Función de topologia.
+	\item Función de distancia entre neuronas.
+\end{enumerate}
+
+\section{Descripción del conjunto de datos}
+
+El conjunto de datos utilizado para esta práctica ha sido generado aleatoriamente mediante la función \lstinline|nngen|. Se ha intentado conseguir un conjunto en donde se diferencien 7 clusters próximos entre ellos pero que sean linealmente separables.
+
+Los datos han sido generados de la siguiente manera:
+
+\begin{lstlisting}
+nngenc([0 5; 0 5; 0 5], 7, 200, 0.30);
+\end{lstlisting}
+
+El primer parámetro (\lstinline|bounds|) se corresponde con los rangos del espacio en donde generar los datos. Nuestros datos estarán en un espacio de tres dimensiones en el rago [0, 5] en cada dimensión.
+
+El segundo parámetro (\lstinline|clusters|) es el número de clusters a generar. Generaremos 7 clusters linealmente diferenciables. Las neuronas se 
+
+El tercer parámetro (\lstinline|points|) es el número de puntos por clustes. Nuestros clusters tendrán 200 puntos cada uno.
+
+Por último se indica la desviación estandar de los clusters (\lstinline|std_dev|). Asignamos una desviación de un 30\% para que los clusters no estén muy localizados y su agrupamiento no sea tan trivial.
+
+Una vez generados los datos deseados, los hemos guardado en un fichero CSV para su posterior explotación en el estudio. 
+
+\section{Descripción del procedimiento}
+
+Para automatizar el estudio lo máximo posible, se ha realizado un script que entrena un mapa auto-organizado variando los parámetros de dimensiones de la topología, tamaño del vecindario, función de topología y función de distancia entre neuronas. 
+
+Por cada configuración, se generan las siguientes figuras y se guardan como imágenes png:
+
+\begin{enumerate}[noitemsep]
+	\item \lstinline|plotsomnd|: en esta representación se puede observar la topología del SOM, las conexiones directas entre neuronas y la distancia entre estas. Las neuronas se dibujan como hexágonos azules, las conexiones mediante líneas rojas y las distancias se representan mediante el coloreado de las parcelas, siendo amarillo las menores distancias y negro las mayores. Esta representación está limitada a topologías \lstinline|hextop| o \lstinline|gridtop|. \citep{matlab:plotsomnd}
+	\item \lstinline|plotsomhits|:  
+\end{enumerate}
+
+
+
+\section{Estudio}
+
+TODO se realizaron para acotar las configuraciones de los parámetros a estudiar.
+
+\section{Mejor resultado obtenido}
+
+
+\section{Explotación de la red}
+
+asdfasdf
+
+
+
+% -------------------------------------------------------------
+% Bibliography
+% -------------------------------------------------------------
+\newpage
+\bibliography{citations}
+\bibliographystyle{plainnat}
+
+\end{document}
