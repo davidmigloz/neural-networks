@@ -175,7 +175,6 @@ Los comandos \lstinline|plotsomnd| y \lstinline|plotsomhits| están limitados a 
 
 \section{Estudio}
 
-\subsection{Introducción}
 Antes de comenzar el estudio, se jugó un poco con los datos para tantear qué valores podían merecer la pena estudiar. Finalmente elegimos los siguientes parámetros:
 
 \begin{itemize}[noitemsep]
@@ -209,9 +208,9 @@ dos dimensiones de datos tridimensionales puede generar confusión.
 
 A continuación se exponen dos ejemplos de un mejor y un peor caso según el criterio seguido. 
 
-Cómo vemos en el "caso malo", no existe una diferenciación clara entre los siete clústeres. Tanto en distancias entre neuronas como en datos captados por cada una. Además, existen neuronas muertas (sin datos o muy pocos) que no favorecen la distinción de ninguna clase.
+Cómo vemos en el 'caso malo', no existe una diferenciación clara entre los siete clústeres. Tanto en distancias entre neuronas como en datos captados por cada una. Además, existen neuronas muertas (sin datos o muy pocos) que no favorecen la distinción de ninguna clase.
 
-Por el contrario, en el "caso bueno" podemos observar una clara diferenciación de los siete clústeres. Vemos como la distancia entre las neuronas fronterizas entre clases es alta, mientras que la distancia entre neuronas de la misma clase es corta. Además, las neuronas muertas se encuentran en fronteras, lo cual favorece la clasificación.
+Por el contrario, en el 'caso bueno' podemos observar una clara diferenciación de los siete clústeres. Vemos como la distancia entre las neuronas fronterizas entre clases es alta, mientras que la distancia entre neuronas de la misma clase es corta. Además, las neuronas muertas se encuentran en fronteras, lo cual favorece la clasificación.
 
 \begin{figure}[!ht]
 	\centering
@@ -229,12 +228,12 @@ Por el contrario, en el "caso bueno" podemos observar una clara diferenciación 
 
 \subsection{Resultados}
 
-Las imágenes de los resultados de las 288 ejecuciones con las diferentes configuraciones de los parámetros se encuentran ordenadas en el repositorio de la práctica: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P2\_SelfOrganizingMap/img}{Resultados}.
+Las imágenes de los resultados de las 288 ejecuciones con las diferentes configuraciones se encuentran ordenadas en el repositorio de la práctica: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P2\_SelfOrganizingMap/img}{Resultados}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
 
-No se incluyen en el informe por no aumentar demasiado la longitud de este.
+En la siguiente tabla se resumen parte de nuestras observaciones de los resultados, calificando cada caso como 'malo', 'medio' o 'bueno'.
 
-En la siguiente tabla se resumen nuestras observaciones de los resultados, calificando cada caso como "malo", "medio" o "bueno".
-
+\begin{table}[!ht]
+\centering
 \begin{tabular}{*3c}
 \toprule
 Rejilla & Distancia & Resultado \\ 
@@ -253,7 +252,9 @@ randtop & dist & medio \\
 				& boxdist & malo \\ 
 \bottomrule
 \end{tabular} 
-
+\caption{Resumen de los resultados}
+\label{tab:results}
+\end{table}
 
 
 \subsection{Resultados reseñables}
