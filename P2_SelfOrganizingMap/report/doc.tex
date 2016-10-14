@@ -133,9 +133,9 @@ Se realizará un estudio sobre el impacto que supone variar los siguientes pará
 
 \begin{figure}[!ht]
 	\centering
-	\label{fig:patternnet}
+	\label{fig:data}
 	\includegraphics[width=\textwidth]{datos.png}
-	\caption{Representación de los datos}
+	\caption{Representación de los datos.}
 \end{figure}
 
 El conjunto de datos utilizado para esta práctica ha sido generado aleatoriamente mediante la función \lstinline|nngen|. Se ha intentado conseguir un conjunto en donde se diferencien 7 clústeres próximos entre ellos pero que sean linealmente separables.
@@ -146,26 +146,26 @@ Los datos han sido generados de la siguiente manera:
 nngenc([0 5; 0 5; 0 5], 7, 200, 0.30);
 \end{lstlisting}
 
-El primer parámetro (\lstinline|bounds|) se corresponde con los rangos del espacio en donde generar los datos. Nuestros datos estarán en un espacio de tres dimensiones en el rago [0, 5] en cada dimensión.
+El primer parámetro (\lstinline|bounds|) se corresponde con los rangos del espacio en donde generar los datos. Nuestros datos están en un espacio de tres dimensiones en el rango [0, 5] en cada una.
 
-El segundo parámetro (\lstinline|clusters|) es el número de clústeres a generar. Generaremos 7 clústeres linealmente diferenciables.
+El segundo parámetro (\lstinline|clusters|) es el número de clústeres a generar. Generamos 7 clústeres linealmente diferenciables.
 
-El tercer parámetro (\lstinline|points|) es el número de puntos por clúster. Nuestros clústeres tendrán 200 puntos cada uno.
+El tercer parámetro (\lstinline|points|) es el número de puntos por clúster. Nuestros clústeres tienen 200 puntos cada uno.
 
 Por último se indica la desviación estándar de los clústeres (\lstinline|std_dev|). Asignamos una desviación de un 30\% para que los clústeres no estén muy localizados y su agrupamiento no sea tan trivial.
 
-Una vez generados los datos deseados, los hemos guardado en un fichero CSV para su posterior explotación en el estudio. 
+Una vez generados los datos deseados, los hemos guardado en un fichero CSV para su posterior explotación en el estudio. En la siguiente figura podemos ver una representación de estos:
 
 \section{Descripción del procedimiento}
 
 Para automatizar el estudio lo máximo posible, se ha realizado un script que entrena un mapa auto-organizado variando los parámetros de dimensiones de la topología, tamaño del vecindario, función de topología y función de distancia entre neuronas. 
 
-Por cada configuración, se generan las siguientes figuras y se guardan como imágenes png:
+Por cada configuración, se generan las siguientes figuras y se guardan como imágenes \lstinline|png|:
 
 \begin{itemize}[noitemsep]
 	\item \lstinline|plotsomnd|: en esta representación se puede observar la topología del SOM (\textit{self-organizing map}), las conexiones directas entre neuronas y la distancia entre estas. Las neuronas se dibujan como hexágonos azules, las conexiones mediante líneas rojas y las distancias se representan mediante el coloreado de las parcelas, correspondiendo el color amarillo a distancias cortas y el negro a distancias grandes. \citep{matlab:plotsomnd}
-	\item \lstinline|plotsomhits|: en esta representación se visualiza el número de datos para los que se está activando cada neurona (el número de vectores de entrada que clasifica). Se dibuja la topología del SOM y en cada parcela, correspondiente a una neurona, se muestra el número total así como un hexágono azul de tamaño relativo a este. \citep{matlab:plotsomhits}
-	\item \lstinline|plotsompos|: muestra un gráfico en 2D en donde se visualizan la posición de las neuronas (puntos azules), las conexiones entre estas (líneas rojas) y las posiciones de los datos (puntos verdes). Permite visualizar cómo el SOM clasifica el espacio de entrada según evoluciona el entrenamiento. \citep{matlab:plotsompos}
+	\item \lstinline|plotsomhits|: en esta representación se visualiza el número de datos para los que se está activando cada neurona (el número de vectores de entrada que clasifica). Se dibuja la topología del SOM y en cada parcela, correspondiente a una neurona, se muestra el número total de datos clasificados, así como un hexágono azul de tamaño relativo a este. \citep{matlab:plotsomhits}
+	\item \lstinline|plotsompos|: muestra un gráfico en 2D en donde se visualizan las posiciones de las neuronas (puntos azules), las conexiones entre estas (líneas rojas) y las posiciones de los datos (puntos verdes). Permite visualizar cómo el SOM clasifica el espacio de entrada según evoluciona el entrenamiento. \citep{matlab:plotsompos}
 \end{itemize}
 
 Los comandos \lstinline|plotsomnd| y \lstinline|plotsomhits| están limitados a topologías \lstinline|hextop| o \lstinline|gridtop|, no pudiendo ser utilizados con \lstinline|randtop|. 
@@ -178,14 +178,14 @@ Los comandos \lstinline|plotsomnd| y \lstinline|plotsomhits| están limitados a 
 Antes de comenzar el estudio, se jugó un poco con los datos para tantear qué valores podían merecer la pena estudiar. Finalmente elegimos los siguientes parámetros:
 
 \begin{itemize}[noitemsep]
-	\item  Función de distancia entre neuronas:
+	\item  Función de distancia entre neuronas: \citep{matlab:distance}
 	\begin{enumerate}[noitemsep]
-		\item \lstinline|dist|: distancia euclídea.
+		\item \lstinline|dist|: distancia Euclídea.
 		\item \lstinline|linkdist|: distancia en número de enlaces.
 		\item \lstinline|mandist|: distancia de Manhattan.
 		\item \lstinline|boxdist|: distancia cuadrada.
 	\end{enumerate}
-	\item Función de topología:
+	\item Función de topología: \citep{matlab:topologies}
 	\begin{enumerate}[noitemsep]
 		\item \lstinline|gridtop|: rejilla cuadrada.
 		\item \lstinline|hextop|: rejilla hexagonal.
@@ -203,8 +203,8 @@ De todas las combinaciones anteriores (288 casos) se seleccionaron manualmente l
 
 La principal limitación que hemos tenido en esta práctica ha sido el no tener un parámetro que nos indicase cómo de bueno o malo era cada caso. Por ello, la clasificación se ha realizado de forma manual (y por tanto con cierta componente de subjetividad).
 
-Para el análisis, nos hemos basado sobretodo en las representaciones \lstinline|plotsomnd| y \lstinline|plotsomhits|. Ya que, nos proporcionan información de calidad sobre cómo se han distribuido las neuronas sobre los datos. En cambio, \lstinline|plotsompos| al realizar una representación en 
-dos dimensiones de datos tridimensionales puede generar confusión.
+Para el análisis, nos hemos basado sobretodo en las representaciones \lstinline|plotsomnd| y \lstinline|plotsomhits|. Ya que, nos proporcionan información de calidad sobre cómo se han distribuido las neuronas sobre los datos. En cambio, \lstinline|plotsompos|, al realizar una representación en 
+dos dimensiones de datos tridimensionales, puede llevar a interpretaciones erroneas, aunque en combinación con los anteriores también es de utilidad.
 
 A continuación se exponen dos ejemplos de un mejor y un peor caso según el criterio seguido. 
 
@@ -214,16 +214,16 @@ Por el contrario, en el 'caso bueno' podemos observar una clara diferenciación 
 
 \begin{figure}[!ht]
 	\centering
-	\label{fig:patternnet}
+	\label{fig:caso-malo}
 	\includegraphics[width=\textwidth]{caso-malo.jpg}
-	\caption{Caso malo}
+	\caption{Caso malo.}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\label{fig:patternnet}
+	\label{fig:caso-bueno}
 	\includegraphics[width=\textwidth]{caso-bueno.jpg}
-	\caption{Caso bueno}
+	\caption{Caso bueno.}
 \end{figure}
 
 \subsection{Resultados}
@@ -234,7 +234,7 @@ En la siguiente tabla se resumen parte de nuestras observaciones de los resultad
 
 \begin{table}[!ht]
 \centering
-\begin{tabular}{*3c}
+\begin{tabular}{r l l}
 \toprule
 Rejilla & Distancia & Resultado \\ 
 \midrule
@@ -256,12 +256,36 @@ randtop & dist & medio \\
 \label{tab:results}
 \end{table}
 
-
 \subsection{Resultados reseñables}
 
+Las conclusiones de los resultados de las ejecuciones con los diferentes parámetros las comentamos en la siguiente sección. En esta, queremos resaltar alguno de los resultados que más nos ha llamado la atención.
 
+En primer lugar, comentar el caso de las neuronas aisladas que nos hemos encontrado en varias ejecuciones con la topología \lstinline|randtop|.
 
+\begin{figure}[!ht]
+	\centering
+	\label{fig:neuronas-aisladas}
+	\includegraphics[width=\textwidth]{neuronas-aisladas.png}
+	\caption{Neuronas aisladas.}
+\end{figure}
 
+En segundo lugar, queremos mostrar el error que obtuvimos al intentar representar una topología \lstinline|randtop| con las funciones \lstinline|plotsomnd| y \lstinline|plotsomhits|. Como ya hemos comentado anteriormente, estos comandos solo pueden ser utilizados con topologías \lstinline|hextop| o \lstinline|gridtop|.
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:error-randtop}
+	\includegraphics[width=\textwidth]{error-randtop.png}
+	\caption{Error al intentar representar \lstinline|randtop|.}
+\end{figure}
+
+Y por último, comentar los casos peculiares que obtuvimos con topología \lstinline|hextop| y la función de distancia \lstinline|mandist|. Vemos como todas las neuronas están unidas como si de una cadena se tratase.
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:hextop-mandist}
+	\includegraphics[width=\textwidth]{hextop-mandist.png}
+	\caption{Topología \lstinline|hextop| con \lstinline|mandist|.}
+\end{figure}
 
 \section{Conclusiones}
 
@@ -270,22 +294,21 @@ Reiterar que el análisis ha sido realizado de forma manual con una cierta compo
 A continuación exponemos nuestras conclusiones sobre cada parámetro.
  
 \begin{itemize}[noitemsep]
-	\item \textbf{Dimensiones de la topología:} según aumentamos el número de neuronas baja, por lo general, la distancia entre estas. Aparecen más neuronas muertas en las regiones fronterizas distantes. Y cada neurona se especializa en un conjunto menor de datos, pero aparecen algunos problemas en la clasificación de clases con fronteras cercanas.
+	\item \textbf{Dimensiones de la topología:} según aumentamos el número de neuronas baja, por lo general, la distancia entre estas. Aparecen más neuronas muertas en las regiones fronterizas distantes. Y cada neurona se especializa en un conjunto menor de datos. Pero a la vez, aparecen algunos problemas en la clasificación de clases con fronteras cercanas.
 	\item \textbf{Tamaño del vecindario:} vemos que es recomendable ampliar el tamaño del vecindario según se amplía las dimensiones de la topología. Pero no hemos encontrado ninguna relación directa del efecto de ampliar el tamaño del vecindario con una dimensión de la topología fija.
 	\item \textbf{Función de topología:} 
 	\begin{itemize}[noitemsep]
 		\item \lstinline|gridtop|: ha proporcionado unos resultados bastante constantes, obteniendo sus mejores resultados con la función de distancia \lstinline|linkdist|. En líneas generales, han sido algo peores que con \lstinline|hextop|.
-		\item \lstinline|hextop|: en general nos ha proporcionado buenos resultados. Sin embargo, utilizando la distancia de Manhattan obtenemos resultados erróneos (las neuronas se distribuyen como si se tratase de una topología lineal).
-		\item \lstinline|randtop|: en primer lugar, comentar que sólo se ha podido representar con \lstinline|plotsompos|, lo cual ha dificultado el análisis. En líneas generales, ha sido la función que peores resultados nos ha proporcionado. Hemos observado mucha variabilidad entre ejecuciones. En algunos casos el ajuste era correcto, pero en otros obteníamos varias neuronas aisladas en zonas aleatorias. Creemos que si el número de vecinos fuese mayor de 0 se podrían obtener mejores resultados.		
+		\item \lstinline|hextop|: en general nos ha proporcionado buenos resultados. Sin embargo, utilizando la distancia de Manhattan obtenemos resultados peculiares. Las neuronas se distribuyen como si se tratase de una topología lineal.
+		\item \lstinline|randtop|: en primer lugar, comentar que sólo se ha podido representar con \lstinline|plotsompos|, lo cual ha dificultado su análisis. En líneas generales, ha sido la función que peores resultados nos ha proporcionado. Hemos observado mucha variabilidad entre ejecuciones. En algunos casos el ajuste era correcto, pero en otros obteníamos varias neuronas aisladas en zonas aleatorias. Creemos que si el número de vecinos fuese mayor de 0 se podrían obtener mejores resultados.		
 	\end{itemize}
-	\item \textbf{Función de distancia entre neuronas:} los resultados son muy dependientes de la topología. Aunque observamos resultados algo mejores con distancias euclídeas y distancias de número de enlaces.
+	\item \textbf{Función de distancia entre neuronas:} los resultados son muy dependientes de la topología. Aunque observamos resultados algo mejores con distancias Euclídeas y distancias de número de enlaces.
 \end{itemize}
 
 
 % -------------------------------------------------------------
 % Bibliography
 % -------------------------------------------------------------
-\newpage
 \bibliography{citations}
 \bibliographystyle{plainnat}
 
