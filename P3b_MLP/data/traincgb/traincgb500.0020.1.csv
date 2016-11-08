@@ -1,0 +1,2 @@
+funcion_entrenamiento,avg_c,C1_1,C1_2,C1_3,C2_1,C2_2,C2_3,C3_1,C3_2,C3_3,tiempo_entrenamiento,max_fail,alpha,beta
+traincgb,0.0229097222222222,139.35,12.05,14.6,3,258.55,106.45,12.55,16.3,6637.15,6.7421875,50,0.002,0.1
