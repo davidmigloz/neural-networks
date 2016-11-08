@@ -64,7 +64,7 @@
 	tabsize=2,											% Tab size
 	title=\lstname, 								% Show filename as caption
 	basicstyle=\ttfamily, 					% Size and font
-  keywordstyle=\color{blue}\ttfamily,
+  keywordstyle=\color{black}\ttfamily,
 	commentstyle=\color{comments},	% Color of comments
   morecomment=[l][\color{magenta}]{\#}
 }
@@ -90,7 +90,7 @@
 	{\huge\bfseries P3: Multilayer Perceptron (MLP) \par}
 	\HRule{2pt}
 	\\ [0.5cm]
-	{Diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación utilizadas en P1\_Thyroid.}
+	{Diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid.}
 	\vfill
 	Estudiantes:\par
 	{\Large\scshape David Miguel Lozano \\ Javier Martínez Riberas \par}
@@ -118,18 +118,18 @@
 
 \section{Introduction}
 
-El objetivo de la práctica es diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación utilizadas en P1\_Thyroid (clasificación de patrones: tiroides).
+El objetivo de la práctica es diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid (clasificación de patrones: tiroides).
 
 Se realizará un estudio sobre los distintos algoritmos de aprendizaje que
 implementan backpropagation y el ajuste de los correspondientes parámetros de estos:
 
-\begin{enumerate}[noitemsep]
+\begin{itemize}[noitemsep]
 	\item \textit{Learning rate} de los pesos.
 	\item \textit{Learning rate} del bias.
 	\item Criterio de parada: límite de epochs para el entrenamiento.
 	\item Criterio de parada: límite de la función de rendimiento (goal)
 	\item Criterio de parada: tiempo de aprendizaje.
-\end{enumerate}
+\end{itemize}
 
 La topología de la red se corresponderá con la configuración más óptima encontrada en la práctica P1\_Thyroid.
 
@@ -160,14 +160,27 @@ Por cada combinación se ejecutan 20 experimentos y se toma el valor medio para 
 
 Se han utilizado los siguientes algoritmos de entrenamiento:
 
-TODO
+\begin{itemize}[noitemsep]
+	\item \lstinline|traincgb|: conjugate gradient backpropagation with Powell-Beale restarts. \citep{matlab:traincgb}
+	\item \lstinline|traincgf|: conjugate gradient backpropagation with Fletcher-Reeves updates. \citep{matlab:traincgf}
+\end{itemize}
+
+Como se puede observar ambos utilizan el algoritmo de retropropagación para la actualización de los pesos. Y por lo tanto, son adecuados para el entrenamiento de un perceptrón multicapa.
+
+Se modifican los siguientes parámetros para cada algoritmo:
+
+\begin{itemize}[noitemsep]
+	\item \lstinline|net.trainParam.max_fail|: maximum validation failures. Rango [10:10:100].
+	\item \lstinline|net.trainParam.alpha|: scale factor that determines sufficient reduction in performance. Rango [0.001:0.001:0.004].
+	\item \lstinline|net.trainParam.beta|: scale factor that determines sufficient large step size. Rango [0.1:0.2:0.8].
+\end{itemize}
 
 Como indicaderes generales se han empleado:
 
-\begin{enumerate}[noitemsep]
-	\item Medidas del error (\lstinline|TR.perf|, \lstinline|TR.vperf| y \lstinline|TR.tperf|).
-	\item Tiempo de entrenamiento (\lstinline|TR.time|)
-\end{enumerate}
+\begin{itemize}[noitemsep]
+	\item Confusion value: fraction of samples misclassified.
+	\item \lstinline|plotperform|: plot network performance. \citep{matlab:plotperform}
+\end{itemize}
 
 \section{Estudio}
 
