@@ -182,15 +182,84 @@ Como indicaderes generales se han empleado:
 	\item \lstinline|plotperform|: plot network performance. \citep{matlab:plotperform}
 \end{itemize}
 
+\emph{*Todo el código generado en esta práctica se encuentra disponible en el siguiente repositorio: 
+\href{https://github.com/davidmigloz/neuronal-networks/tree/master/P2\_SelfOrganizingMap}{P2\_SelfOrganizingMap}.}
+
 \section{Estudio}
 
 En primer lugar, se han utilizado los parámetros descritos para realizar el estudio y no todos los propuestos en el enunciado de la práctica (\textit{epochs}, \lstinline|goal| y tiempo de aprendizaje) porque, debido a la experiencia obtenida durante la realización de la práctica 1, somos conscientes que los criterios de parada elegidos son los que realmente detienen el entrenamiento para este problema en concreto.
 
+Todos los datos generados durante los 160 experimentos del estudio (archivos CSV con los datos recogidos, imágenes con las gráficas de rendimiento y tablas excel de resumen) se encuentran en el repositorio: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/data}{Data}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
 
+Tras analizar los datos obtenidos, hemos seleccionado el mejor caso para algoritmo y cada parámetro basándonos en el que tuviese el menor valor de confusión medio.
 
+Mejor caso para el algoritmo \lstinline|traincgb|:
 
+\begin{itemize}[noitemsep]
+	\item \lstinline|max_fail|: 50.
+	\item \lstinline|alpha|: 0.001.
+	\item \lstinline|beta|: 0.1.
+\end{itemize}
 
-TODO
+Su gráfico de rendimiento fue:
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:traincgb}
+	\includegraphics[width=\textwidth]{traincgb50000101.png}
+	\caption{Rendimiento mejor caso \lstinline|traincgb|.}
+\end{figure}
+
+\newpage
+
+Mejor caso para el algoritmo \lstinline|traincgf|:
+
+\begin{itemize}[noitemsep]
+	\item \lstinline|max_fail|: 100.
+	\item \lstinline|alpha|: 0.002.
+	\item \lstinline|beta|: 0.1.
+\end{itemize}
+
+Su gráfico de rendimiento fue:
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:traincgb}
+	\includegraphics[width=\textwidth]{traincgf10000201.png}
+	\caption{Rendimiento mejor caso \lstinline|traincgf|.}
+\end{figure}
+
+Hemos obserdo que los valores \lstinline|alpha| y \lstinline|beta| no afectan en la medida que afecta \lstinline|max_fail|. Por esto, nos hemos limitado a graficar este último parámetro.
+
+\begin{tikzpicture}[every plot/.append style={semithick}]
+\begin{axis}[
+    xlabel={Max. fail},
+    ylabel={Valor de confusión},
+    legend pos=south east,
+    ymajorgrids=true,
+    grid style=dashed,
+    scaled ticks=false, % prevent scale labels
+    tick label style={/pgf/number format/fixed, % label number format
+                      /pgf/number format/precision=3}, 
+    width=14cm,
+]
+
+\addplot
+    coordinates {
+(10,0.035986)(20,0.025701)(30,0.024410)(40,0.022194)(50,0.020063)(60,0.020250)(70,0.049056)(80,0.047896)(90,0.043236)(100,0.045826)
+    };
+    \addlegendentry{traincgb}
+
+\addplot
+    coordinates {
+    (10,0.048200)(20,0.038600)(30,0.029900)(40,0.026400)(50,0.028500)(60,0.027000)(70,0.025700)(80,0.022300)(90,0.022100)(100,0.019700)
+    };
+    \addlegendentry{traincgf}
+                         
+\end{axis}
+\end{tikzpicture}
+
+Como podemos observar el valor de confusión con el algoritmo \lstinline|traincgf| tiende a cero según se incrementa el parámetro \lstinline|max_fail|. Para comprobarlo, hemos realizado otra prueba incrementando el límite superior de este parámetro a 10.000.
 
 \section{Conclusiones}
 
