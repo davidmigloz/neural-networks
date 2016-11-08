@@ -121,15 +121,15 @@
 El objetivo de la práctica es diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid (clasificación de patrones: tiroides).
 
 Se realizará un estudio sobre los distintos algoritmos de aprendizaje que
-implementan backpropagation y el ajuste de los correspondientes parámetros de estos:
+implementan backpropagation y el ajuste de los correspondientes parámetros de estos. En concreto:
 
 \begin{itemize}[noitemsep]
-	\item \textit{Learning rate} de los pesos.
-	\item \textit{Learning rate} del bias.
-	\item Criterio de parada: límite de epochs para el entrenamiento.
-	\item Criterio de parada: límite de la función de rendimiento (goal)
-	\item Criterio de parada: tiempo de aprendizaje.
+	\item \lstinline|net.trainParam.max_fail|: máximo número de fallos de validación.
+	\item \lstinline|net.trainParam.alpha|: \textit{learning rate} de los pesos.
+	\item \lstinline|net.trainParam.beta|: \textit{learning rate} de los bias.
 \end{itemize}
+
+\textit{*En el estudio se explicará porque se han selecionado estos parámetros para realizar el estudio y no todos los propuestos en el enunciado de la práctica.}
 
 La topología de la red se corresponderá con la configuración más óptima encontrada en la práctica P1\_Thyroid.
 
@@ -183,6 +183,12 @@ Como indicaderes generales se han empleado:
 \end{itemize}
 
 \section{Estudio}
+
+En primer lugar, se han utilizado los parámetros descritos para realizar el estudio y no todos los propuestos en el enunciado de la práctica (\textit{epochs}, \lstinline|goal| y tiempo de aprendizaje) porque, debido a la experiencia obtenida durante la realización de la práctica 1, somos conscientes que los criterios de parada elegidos son los que realmente detienen el entrenamiento para este problema en concreto.
+
+
+
+
 
 TODO
 
