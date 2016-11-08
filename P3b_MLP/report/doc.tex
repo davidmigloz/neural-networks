@@ -90,7 +90,7 @@
 	{\huge\bfseries P3: Multilayer Perceptron (MLP) \par}
 	\HRule{2pt}
 	\\ [0.5cm]
-	{Diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid.}
+	{Diseñar y entrenar distintos Perceptrón Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid.}
 	\vfill
 	Estudiantes:\par
 	{\Large\scshape David Miguel Lozano \\ Javier Martínez Riberas \par}
@@ -118,10 +118,9 @@
 
 \section{Introduction}
 
-El objetivo de la práctica es diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid (clasificación de patrones: tiroides).
+El objetivo de la práctica es diseñar y entrenar distintos Perceptrón Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid (clasificación de patrones: tiroides).
 
-Se realizará un estudio sobre los distintos algoritmos de aprendizaje que
-implementan backpropagation y el ajuste de los correspondientes parámetros de estos. En concreto:
+Se realizará un estudio sobre los distintos algoritmos de aprendizaje que implementan \textit{backpropagation} y el ajuste de los correspondientes parámetros de estos. En concreto:
 
 \begin{itemize}[noitemsep]
 	\item \lstinline|net.trainParam.max_fail|: máximo número de fallos de validación.
@@ -156,13 +155,13 @@ Las tres clases que contiene el dataset son:
 
 Para automatizar el estudio lo máximo posible, se ha realizado un script que realiza varios entrenamientos con los diferentes algoritmos de entrenamiento y variando los parámetros mencionados. 
 
-Por cada combinación se ejecutan 20 experimentos y se toma el valor medio para reducir el impacto de la aleatoriedad en la inicialización de los pesos y bias.
+Por cada combinación se ejecutan 20 experimentos y se toma el valor medio para reducir el impacto de la aleatoriedad en la inicialización de los pesos y los bias.
 
 Se han utilizado los siguientes algoritmos de entrenamiento:
 
 \begin{itemize}[noitemsep]
-	\item \lstinline|traincgb|: conjugate gradient backpropagation with Powell-Beale restarts. \citep{matlab:traincgb}
-	\item \lstinline|traincgf|: conjugate gradient backpropagation with Fletcher-Reeves updates. \citep{matlab:traincgf}
+	\item \lstinline|traincgb|: \textit{conjugate gradient backpropagation with Powell-Beale restarts}. \citep{matlab:traincgb}
+	\item \lstinline|traincgf|: \textit{conjugate gradient backpropagation with Fletcher-Reeves updates}. \citep{matlab:traincgf}
 \end{itemize}
 
 Como se puede observar ambos utilizan el algoritmo de retropropagación para la actualización de los pesos. Y por lo tanto, son adecuados para el entrenamiento de un perceptrón multicapa.
@@ -170,28 +169,28 @@ Como se puede observar ambos utilizan el algoritmo de retropropagación para la 
 Se modifican los siguientes parámetros para cada algoritmo:
 
 \begin{itemize}[noitemsep]
-	\item \lstinline|net.trainParam.max_fail|: maximum validation failures. Rango [10:10:100].
-	\item \lstinline|net.trainParam.alpha|: scale factor that determines sufficient reduction in performance. Rango [0.001:0.001:0.004].
-	\item \lstinline|net.trainParam.beta|: scale factor that determines sufficient large step size. Rango [0.1:0.2:0.8].
+	\item \lstinline|net.trainParam.max_fail|: \textit{maximum validation failures}. Rango [10:10:100].
+	\item \lstinline|net.trainParam.alpha|: \textit{scale factor that determines sufficient reduction in performance}. Rango [0.001:0.001:0.004].
+	\item \lstinline|net.trainParam.beta|: \textit{scale factor that determines sufficient large step size}. Rango [0.1:0.2:0.8].
 \end{itemize}
 
-Como indicaderes generales se han empleado:
+Como indicadores generales se han empleado:
 
 \begin{itemize}[noitemsep]
-	\item Confusion value: fraction of samples misclassified.
-	\item \lstinline|plotperform|: plot network performance. \citep{matlab:plotperform}
+	\item \lstinline|C|: \textit{confusion value (fraction of samples misclassified)}.
+	\item \lstinline|plotperform|: \textit{plot network performance}. \citep{matlab:plotperform}
 \end{itemize}
 
 \emph{*Todo el código generado en esta práctica se encuentra disponible en el siguiente repositorio: 
-\href{https://github.com/davidmigloz/neuronal-networks/tree/master/P2\_SelfOrganizingMap}{P2\_SelfOrganizingMap}.}
+\href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/}{P3b\_MLP}.}
 
 \section{Estudio}
 
 En primer lugar, se han utilizado los parámetros descritos para realizar el estudio y no todos los propuestos en el enunciado de la práctica (\textit{epochs}, \lstinline|goal| y tiempo de aprendizaje) porque, debido a la experiencia obtenida durante la realización de la práctica 1, somos conscientes que los criterios de parada elegidos son los que realmente detienen el entrenamiento para este problema en concreto.
 
-Todos los datos generados durante los 160 experimentos del estudio (archivos CSV con los datos recogidos, imágenes con las gráficas de rendimiento y tablas excel de resumen) se encuentran en el repositorio: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/data}{Data}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
+Todos los datos generados durante los 320 experimentos del estudio (archivos CSV con los datos recogidos, imágenes con las gráficas de rendimiento y tablas excel de resumen) se encuentran en el directorio del repositorio: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/data}{Data}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
 
-Tras analizar los datos obtenidos, hemos seleccionado el mejor caso para algoritmo y cada parámetro basándonos en el que tuviese el menor valor de confusión medio.
+Tras analizar los datos obtenidos, hemos seleccionado el mejor caso para cada algoritmo y cada parámetro basándonos en el que tuviese el menor valor de confusión medio.
 
 Mejor caso para el algoritmo \lstinline|traincgb|:
 
@@ -259,13 +258,36 @@ Hemos obserdo que los valores \lstinline|alpha| y \lstinline|beta| no afectan en
 \end{axis}
 \end{tikzpicture}
 
-Como podemos observar el valor de confusión con el algoritmo \lstinline|traincgf| tiende a cero según se incrementa el parámetro \lstinline|max_fail|. Para comprobarlo, hemos realizado otra prueba incrementando el límite superior de este parámetro a 10.000.
+Como podemos observar el algoritmo \lstinline|traincgb| alcalza sus valores mínimos en torno a 50 y luego se dispara. En cambio, el valor de confusión con el algoritmo \lstinline|traincgf| tiende a cero según se incrementa el parámetro \lstinline|max_fail|. 
+
+Para comprobar la tendencia decreciente del segundo algoritmo, hemos realizado otra prueba incrementando el límite superior del parámetro \lstinline|max_fail| a 10.000. De manera que el criterio de parada es el número de \textit{epochs} (1000). El mejor caso obtenido es:
+
+\begin{itemize}[noitemsep]
+	\item \lstinline|max_fail|: 10.000.
+	\item \lstinline|alpha|: 0.004.
+	\item \lstinline|beta|: 0.5.
+\end{itemize}
+
+\newpage
+
+Su gráfico de rendimiento fue:
+
+\begin{figure}[!ht]
+	\centering
+	\label{fig:traincgb}
+	\includegraphics[width=\textwidth]{traincgf560000405.png}
+	\caption{Rendimiento mejor caso \lstinline|traincgf|.}
+\end{figure}
+
+Vemos como se ha reducido el error hasta un 0,7\%. Lo cual es una gran mejora respecto a los resultados obtenidos en la primera práctica que estaban en torno al 4,5\%.
 
 \section{Conclusiones}
 
-El rendimiento del algoritmo es muy sensible al ajuste del \textit{learning rate}. Si se establece un valor muy alto el algoritmo oscila y se vuelve inestable. Por el contrario, si se establece un valor muy bajo, la red neuronal puede demorarse demasiado en converger. 
-
-TODO
+- El límite de \textit{epochs} por defecto (1.000) es un límite suficientemente alto como no influir en el entrenamiento.
+- El límite de la función de rendimiento por defecto es 0, lo cual significa que hasta que la red neuronal no sea perfecta no va a parar de entrenar. Obviamente, según se aumenta este parámetro los resultados van a empeorar.
+- El tiempo de aprendizaje por defecto es infinito. En nuestro caso, hasta 8 segundos no empezaría a afectar al entrenamiento, y obviamente, cuanto más se reduzca peor entrenada estará la red.
+- En nuestro caso, con los \textit{learning rates} (para el bias y los pesos) estudiados, no hemos encontrado variación significativa. En pruebas posteriores, se ha visto que estos producían variaciones significativas entre órdenes de magnitud diferentes. Cuanto más altos eran, más rápido era el entrenamiento, pero más varianza había en el entrenamiento de la red.
+- El único criterio de parada que realmente detenía el entrenamiento en nuestro problema era el parámetro \lstinline|max_fail|. Aumentando este se consiguieron mejorar los resultados notablemente.
 
 % -------------------------------------------------------------
 % Bibliography
