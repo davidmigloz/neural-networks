@@ -18,6 +18,8 @@ Diseñar y entrenar un mapa auto-organizado con una rejilla bidimensional para e
 
 Experimentar con una red neuronal convolucional (CNN), con el objetivo de hacer una comparativa respecto al rendimiento de esta para un subconjunto del dataset CIFAR-10.
 
+> Informe: [P3a_CNN.pdf]()
+
 ### P3b_MLP
 
 Diseñar y entrenar distintos Perceptron Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación utilizadas en P1_Thyroid.
