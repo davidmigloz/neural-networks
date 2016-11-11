@@ -118,7 +118,7 @@
 
 \section{Introduction}
 
-El objetivo de la práctica es diseñar y entrenar distintos Perceptrón Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en P1\_Thyroid (clasificación de patrones: tiroides).
+El objetivo de la práctica es diseñar y entrenar distintos Perceptrón Multicapa (MLP), con el objetivo de hacer una comparativa respecto al rendimiento de estos para la misma tarea y aplicación estudiada en \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P1\_Thyroid}{P1\_Thyroid} (clasificación de patrones: tiroides).
 
 Se realizará un estudio sobre los distintos algoritmos de aprendizaje que implementan \textit{backpropagation} y el ajuste de los correspondientes parámetros de estos. En concreto:
 
@@ -128,7 +128,7 @@ Se realizará un estudio sobre los distintos algoritmos de aprendizaje que imple
 	\item \lstinline|net.trainParam.beta|: \textit{learning rate} de los bias.
 \end{itemize}
 
-\textit{*En el estudio se explicará porque se han selecionado estos parámetros para realizar el estudio y no todos los propuestos en el enunciado de la práctica.}
+\textit{*En el estudio se explicará porque se han seleccionado estos parámetros para realizar el estudio y no todos los propuestos en el enunciado de la práctica.}
 
 La topología de la red se corresponderá con la configuración más óptima encontrada en la práctica P1\_Thyroid.
 
@@ -186,9 +186,9 @@ Como indicadores generales se han empleado:
 
 \section{Estudio}
 
-En primer lugar, se han utilizado los parámetros descritos para realizar el estudio y no todos los propuestos en el enunciado de la práctica (\textit{epochs}, \lstinline|goal| y tiempo de aprendizaje) porque, debido a la experiencia obtenida durante la realización de la práctica 1, somos conscientes que los criterios de parada elegidos son los que realmente detienen el entrenamiento para este problema en concreto.
+En primer lugar, se han utilizado los parámetros descritos en la sección anterior para realizar el estudio y no todos los propuestos en el enunciado de la práctica (\textit{epochs}, \lstinline|goal| y tiempo de aprendizaje) porque, debido a la experiencia obtenida durante la realización de la práctica 1, somos conscientes que los parámetros elegidos son los más relevantes para este problema en concreto y, por tanto, los más interesantes de estudiar.
 
-Todos los datos generados durante los 320 experimentos del estudio (archivos CSV con los datos recogidos, imágenes con las gráficas de rendimiento y tablas excel de resumen) se encuentran en el directorio del repositorio: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/data}{Data}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
+Todos los datos generados durante los 320 experimentos del estudio (archivos CSV con los datos recogidos, imágenes con las gráficas de rendimiento y tablas Excel de resumen) se encuentran en el directorio del repositorio: \href{https://github.com/davidmigloz/neuronal-networks/tree/master/P3b\_MLP/data}{Data}. No se incluyen en el informe por no aumentar demasiado la longitud de este.
 
 Tras analizar los datos obtenidos, hemos seleccionado el mejor caso para cada algoritmo y cada parámetro basándonos en el que tuviese el menor valor de confusión medio.
 
@@ -228,7 +228,7 @@ Su gráfico de rendimiento fue:
 	\caption{Rendimiento mejor caso \lstinline|traincgf|.}
 \end{figure}
 
-Hemos obserdo que los valores \lstinline|alpha| y \lstinline|beta| no afectan en la medida que afecta \lstinline|max_fail|. Por esto, nos hemos limitado a graficar este último parámetro.
+Hemos observado que los valores \lstinline|alpha| y \lstinline|beta| no afectan en la medida que afecta \lstinline|max_fail|. Por esto, nos hemos limitado a graficar este último parámetro.
 
 \begin{tikzpicture}[every plot/.append style={semithick}]
 \begin{axis}[
@@ -279,15 +279,22 @@ Su gráfico de rendimiento fue:
 	\caption{Rendimiento mejor caso \lstinline|traincgf|.}
 \end{figure}
 
-Vemos como se ha reducido el error hasta un ~0,7\%. Lo cual es una gran mejora respecto a los resultados obtenidos en la primera práctica que estaban en torno al 4,5\%. Incluso es una mejora respecto a los resultados que hemos conseguido hasta ahora que llega al 2\%. Debemos insistir en que esto no es un pico debido a la varianza ya que lo hemos comprobado varias veces.
+Vemos como se ha reducido el error hasta un ~0,7\%. Lo cual es una gran mejora respecto a los resultados obtenidos en la primera práctica que estaban en torno al 4,5\% o el 2\% obtenido en el primer experimento de este estudio. 
 
+*El experimento se ha repetido 20 veces para descartar que este buen rendimiento obtenido fuese cosa del azar.
+
+\newpage
 \section{Conclusiones}
 
-- El límite de \textit{epochs} por defecto (1.000) es un límite suficientemente alto como no influir en el entrenamiento.
-- El límite de la función de rendimiento por defecto es 0, lo cual significa que hasta que la red neuronal no sea perfecta no va a parar de entrenar. Obviamente, según se aumenta este parámetro los resultados van a empeorar.
-- El tiempo de aprendizaje por defecto es infinito. En nuestro caso, hasta 8 segundos no empezaría a afectar al entrenamiento, y obviamente, cuanto más se reduzca peor entrenada estará la red.
-- En nuestro caso, con los \textit{learning rates} (para el bias y los pesos) estudiados, no hemos encontrado variación significativa. En pruebas posteriores, se ha visto que estos producían variaciones significativas entre órdenes de magnitud diferentes. Cuanto más altos eran, más rápido era el entrenamiento, pero más varianza había en el entrenamiento de la red.
-- El único criterio de parada que realmente detenía el entrenamiento en nuestro problema era el parámetro \lstinline|max_fail|. Aumentando este se consiguieron mejorar los resultados notablemente.
+Tras el análisis de los datos obtenidos, podemos concluir que:
+
+\begin{enumerate}[noitemsep]
+	\item El límite de \textit{epochs} por defecto (1.000) es un límite suficientemente alto como no influir en el entrenamiento.
+	\item El límite de la función de rendimiento por defecto es 0, lo cual significa que 			hasta que la red neuronal no sea perfecta, esta no va a parar de entrenar. Obviamente, según se aumenta este parámetro los resultados van a empeorar (aunque mejorará el tiempo de entrenamiento).
+	\item El tiempo de aprendizaje por defecto es infinito. En nuestro caso, hasta 8 segundos no empezaría a afectar al entrenamiento, y obviamente, cuanto más se reduzca peor entrenada estará la red.
+	\item En nuestro caso, con los \textit{learning rates} (para el bias y los pesos) estudiados, no hemos encontrado variación significativa. En pruebas posteriores, se ha visto que estos producían variaciones significativas entre órdenes de magnitud diferentes. Cuanto más altos eran, más rápido era el entrenamiento, pero más varianza había en el entrenamiento de la red.
+	\item El único criterio de parada que realmente detenía el entrenamiento en nuestro problema era el parámetro \lstinline|max_fail|. Aumentando este y utilizando \lstinline|traincgf| se consiguieron mejorar los resultados notablemente. Sin embargo, el algoritmo \lstinline|traincgb| conseguía su mejor rendimiento entorno a valores de 50, pero empeoraba según se aumentaban más.
+\end{enumerate}
 
 % -------------------------------------------------------------
 % Bibliography
